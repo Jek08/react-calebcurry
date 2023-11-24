@@ -24,6 +24,18 @@ function App() {
             img: "https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
         },
     ]);
+
+    function updateEmployee(id, newName, newRole) {
+        const updatedEmployees = employees.map((employee) => {
+            if (id == employee.id) {
+                return { ...employee, name: newName, role: newRole };
+            }
+
+            return employee;
+        });
+        setEmployees(updatedEmployees);
+    }
+
     const showEmployees = true;
 
     return (
@@ -42,9 +54,11 @@ function App() {
                             return (
                                 <Employee
                                     key={employee.id}
+                                    id={employee.id}
                                     name={employee.name}
                                     role={employee.role}
                                     img={employee.img}
+                                    updateEmployee={updateEmployee}
                                 />
                             );
                         })}
