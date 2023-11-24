@@ -4,6 +4,7 @@ import "./App.css";
 import Employee from "./components/Employee";
 import AddEmployee from "./components/AddEmployee";
 import EditEmployee from "./components/EditEmployee";
+import Header from "./components/Header";
 
 function App() {
     const [role, setRole] = useState("dev");
@@ -52,17 +53,11 @@ function App() {
     const showEmployees = true;
 
     return (
-        <div className="App">
+        <div className="App bg-gray-300 min-h-screen">
+            <Header />
             {showEmployees ? (
                 <>
-                    <input
-                        type="text"
-                        onChange={(e) => {
-                            e.preventDefault();
-                            setRole(e.target.value);
-                        }}
-                    />
-                    <div className="flex flex-wrap">
+                    <div className="flex flex-wrap justify-center mobile:flex-nowrap mobile:flex-col mobile:items-center">
                         {employees.map((employee) => {
                             const editEmployee = (
                                 <EditEmployee
