@@ -25,6 +25,24 @@ function Employees() {
             role: "Graphic Designer",
             img: "https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
         },
+        {
+            id: 1,
+            name: "Nuna",
+            role: "Developer",
+            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTTQuyO8Mw-k4JUoKh5MnfhfMz4AycLb2Ujw&usqp=CAU",
+        },
+        {
+            id: 2,
+            name: "Abbi",
+            role: "Manager",
+            img: "https://images.pexels.com/photos/1674752/pexels-photo-1674752.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+        },
+        {
+            id: 3,
+            name: "Lupin",
+            role: "Graphic Designer",
+            img: "https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+        },
     ]);
 
     function updateEmployee(id, newName, newRole) {
@@ -51,10 +69,10 @@ function Employees() {
     const showEmployees = true;
 
     return (
-        <div className="App bg-gray-300 min-h-screen">
+        <div className="">
             {showEmployees ? (
                 <>
-                    <div className="flex flex-wrap justify-center mobile:flex-nowrap mobile:flex-col mobile:items-center">
+                    <div className="flex flex-wrap justify-center">
                         {employees.map((employee) => {
                             const editEmployee = (
                                 <EditEmployee
