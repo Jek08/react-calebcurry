@@ -1,37 +1,52 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import NotFound from "./NotFound";
 
 export default function Definition() {
     const [word, setWord] = useState();
-    console.log(useParams());
+    const [notFound, setNotFound] = useState(false);
+    const navigate = useNavigate();
     let { search } = useParams();
 
     useEffect(() => {
         fetch("https://api.dictionaryapi.dev/api/v2/entries/en/" + search)
-            .then((response) => response.json())
-            .then((data) => {
-                if (data == undefined) {
-                    console.log("Cannot reach freedictionary");
-                } else {
-                    setWord(data[0].meanings);
+            .then((response) => {
+                if (response.status == 404) {
+                    setNotFound(true);
                 }
+                return response.json();
+            })
+            .then((data) => {
+                setWord(data[0].meanings);
             });
     }, []);
 
+    if (notFound === true) {
+        return (
+            <>
+                <NotFound />
+                <Link to="/dictionary">Search another</Link>
+            </>
+        );
+    }
+
     return (
         <>
-            <h1>Definition Page</h1>
-            {word
-                ? word.map((meaning) => {
-                      return (
-                          <p key={uuidv4()}>
-                              {meaning.partOfSpeech + " : "}
-                              {meaning.definitions[0].definition}
-                          </p>
-                      );
-                  })
-                : null}
+            {word ? (
+                <>
+                    <h1>Definition Page</h1>
+                    {word.map((meaning) => {
+                        return (
+                            <p key={uuidv4()}>
+                                {meaning.partOfSpeech + " : "}
+                                {meaning.definitions[0].definition}
+                            </p>
+                        );
+                    })}{" "}
+                </>
+            ) : null}
         </>
     );
 }

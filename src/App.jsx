@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dictionary from "./pages/Dictionary";
 import Definition from "./pages/Definition";
+import NotFound from "./pages/NotFound";
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                         path="/definition/:search"
                         element={<Definition />}
                     />
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </Header>
         </BrowserRouter>
