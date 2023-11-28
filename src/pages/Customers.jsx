@@ -5,13 +5,17 @@ import AddCustomer from "../components/AddCustomer";
 
 export default function Customer() {
     const [customers, setCustomers] = useState();
+    const [show, setShow] = useState(false);
+
+    function toggleShow() {
+        setShow(!show);
+    }
 
     useEffect(() => {
         const url = baseUrl + "api/customers/";
         fetch(url)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 setCustomers(data.customers);
             });
     }, []);
@@ -32,7 +36,11 @@ export default function Customer() {
                 }
                 return response.json();
             })
-            .then((data) => {})
+            .then((data) => {
+                // close the input modal
+                setCustomers([...customers, data.customer]);
+                toggleShow();
+            })
             .catch((e) => console.log(e));
     }
 
@@ -52,7 +60,11 @@ export default function Customer() {
                       })
                     : null}
             </ul>
-            <AddCustomer newCustomer={newCustomer} />
+            <AddCustomer
+                newCustomer={newCustomer}
+                show={show}
+                toggleShow={toggleShow}
+            />
         </>
     );
 }
