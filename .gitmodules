@@ -1,0 +1,3 @@
+[submodule "react-calebcurry-backend"]
+	path = react-calebcurry-backend
+	url = git@github.com:Jek08/react-calebcurry-backend.git
