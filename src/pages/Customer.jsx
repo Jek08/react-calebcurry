@@ -12,9 +12,14 @@ export default function Customer() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // console.log("customer ", customer);
-        // console.log("tempcustomer ", tempCustomer);
-        // console.log(change);
+        if (!customer) return;
+        if (!tempCustomer) return;
+        let equal = true;
+        if (customer.name !== tempCustomer.name) equal = false;
+        if (customer.industry !== tempCustomer.industry) equal = false;
+        if (equal) {
+            setChange(false);
+        }
     });
 
     useEffect(() => {
@@ -83,6 +88,7 @@ export default function Customer() {
                     {change ? (
                         <>
                             <button
+                                className="m-2"
                                 onClick={(e) => {
                                     setTempCustomer({ ...customer });
                                     setChange(false);
@@ -90,7 +96,9 @@ export default function Customer() {
                             >
                                 Cancel
                             </button>
-                            <button onClick={updateCustomer}>Save</button>
+                            <button className="m-2" onClick={updateCustomer}>
+                                Save
+                            </button>
                         </>
                     ) : null}
                 </div>
