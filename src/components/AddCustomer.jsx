@@ -13,7 +13,7 @@ export default function AddCustomer(props) {
     return (
         <>
             <button
-                className="block mx-auto my-3 bg-green-400 text-white py-2 px-4 rounded-md hover:bg-green-500"
+                className="block my-3 bg-green-400 text-white py-2 px-4 rounded-md hover:bg-green-500"
                 onClick={props.toggleShow}
             >
                 + Add Customer
