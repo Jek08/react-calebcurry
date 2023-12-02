@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dictionary from "./pages/Dictionary";
 import Definition from "./pages/Definition";
 import NotFound from "./pages/NotFound";
+import Login from "./pages/Login";
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                         path="/dictionary/:search"
                         element={<Definition />}
                     />
+                    <Route path="/login" element={<Login />} />
                     <Route path="/404" element={<NotFound />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>

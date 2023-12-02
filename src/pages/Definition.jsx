@@ -18,7 +18,11 @@ export default function Definition() {
                 if (response.status == 404) {
                     setNotFound(true);
                 } else if (response.status == 401) {
-                    navigate("/login");
+                    navigate("/login", {
+                        state: {
+                            previousUrl: location.pathname,
+                        },
+                    });
                 } else if (response.status == 500) {
                     setError(true);
                 }

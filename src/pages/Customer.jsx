@@ -25,10 +25,22 @@ export default function Customer() {
 
     useEffect(() => {
         const url = baseUrl + "api/customers/" + id;
-        fetch(url)
+        fetch(url, {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("access"),
+            },
+        })
             .then((response) => {
                 if (response.status == 404) {
                     setNotFound(true);
+                }
+                if (response.status === 401) {
+                    navigate("/login", {
+                        state: {
+                            previousUrl: location.pathname,
+                        },
+                    });
                 }
                 if (!response.ok)
                     throw new Error("something went wrong, try again later");
@@ -51,10 +63,18 @@ export default function Customer() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("access"),
             },
             body: JSON.stringify(tempCustomer),
         })
             .then((response) => {
+                if (response.status === 401) {
+                    navigate("/login", {
+                        state: {
+                            previousUrl: location.pathname,
+                        },
+                    });
+                }
                 if (!response.ok) throw new Error("something went wrong");
                 return response.json();
             })
@@ -147,9 +167,20 @@ export default function Customer() {
                                     method: "DELETE",
                                     headers: {
                                         "Content-Type": "application/json",
+                                        Authorization:
+                                            "Bearer " +
+                                            localStorage.getItem("access"),
                                     },
                                 })
                                     .then((response) => {
+                                        if (response.status === 401) {
+                                            navigate("/login", {
+                                                state: {
+                                                    previousUrl:
+                                                        location.pathname,
+                                                },
+                                            });
+                                        }
                                         if (!response.ok) {
                                             throw new Error(
                                                 "Something went wrong"
