@@ -1,15 +1,16 @@
 import "./App.css";
 import { createContext, useEffect, useState } from "react";
+import Header from "./components/Header";
 import Employees from "./pages/Employees";
 import Customers from "./pages/Customers";
 import Customer from "./pages/Customer";
-import Header from "./components/Header";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dictionary from "./pages/Dictionary";
 import Definition from "./pages/Definition";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import { baseUrl } from "./shared";
+import Register from "./pages/Register";
 
 export const LoginContext = createContext();
 
@@ -58,7 +59,7 @@ function App() {
     }
 
     return (
-        <LoginContext.Provider value={[loggedIn, changeLoggedIn]}>
+        <LoginContext.Provider value={[loggedIn, setLoggedIn]}>
             <BrowserRouter>
                 <Header>
                     <Routes>
@@ -70,6 +71,7 @@ function App() {
                             path="/dictionary/:search"
                             element={<Definition />}
                         />
+                        <Route path="/register" element={<Register />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/404" element={<NotFound />} />
                         <Route path="*" element={<NotFound />} />

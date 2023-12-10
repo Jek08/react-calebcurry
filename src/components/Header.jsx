@@ -11,14 +11,12 @@ const navigation = [
     { name: "Dictionary", href: "/dictionary" },
 ];
 
-function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
-}
-
 export default function Header(props) {
     const [loggedIn, setLoggedIn] = useContext(LoginContext);
 
-    useEffect(() => {});
+    useEffect(() => {
+        console.log(loggedIn);
+    });
 
     return (
         <>
@@ -71,11 +69,11 @@ export default function Header(props) {
                                             {loggedIn ? (
                                                 <NavLink
                                                     to={"/login"}
-                                                    className="text-gray-300 no-underline rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-700 hover:text-white"
                                                     onClick={() => {
-                                                        setLoggedIn(false);
                                                         localStorage.clear();
+                                                        setLoggedIn(false);
                                                     }}
+                                                    className="text-gray-300 no-underline rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-700 hover:text-white"
                                                 >
                                                     Logout
                                                 </NavLink>
